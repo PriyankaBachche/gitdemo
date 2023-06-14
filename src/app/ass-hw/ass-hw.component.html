@@ -1,0 +1,125 @@
+<div class="container w-50" style="background-color: azure;">
+    <h2 class="header">Registration Form</h2>
+<form class="mt-2"[formGroup]="regForm"(ngSubmit)="saveform()" >
+    <div class="mb-3">
+      <label for="id1" class="form-label">Name</label>
+      <input type="text" class="form-control" id="id1"formControlName="Name" >
+      <div *ngIf="Name?.touched && Name?.invalid">
+        <div  class="invalid-feedback d-block"*ngIf="Name?.errors?.['required']">
+           It is Required
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="id2" class="form-label">Address</label>
+      <input type="text" class="form-control" id="id2" formControlName="Address">
+      <div *ngIf="Name?.touched && Name?.invalid">
+        <div  class="invalid-feedback d-block"*ngIf="Name?.errors?.['required']">
+           It is Required
+        </div>
+      </div>
+    </div>
+    <!-- select country -->
+    <div class="mb-3">   
+        <label for="id3" class="form-label">Select Country</label>
+        <select name="country" id="id3"class="form-control" formControlName="country" >
+            <option value="">Select</option>
+            <option *ngFor="let countries of countrylist" >{{ countries }}</option>
+        </select>
+        <div *ngIf="country1?.touched && country1?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="country1?.errors?.['required']">
+               It is Required
+            </div>
+        </div>
+    </div>
+        <!-- state -->
+    <div class="mb-3">   
+        <label for="id4" class="form-label">Select State</label>
+        <select name="state" id="id4"class="form-control"formControlName=state>
+            <option >State</option>
+            <option *ngFor="let state of states">{{ state}}</option>
+        </select>
+        <div *ngIf="state?.touched && state?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="state?.errors?.['required']">
+               It is Required
+            </div>
+          </div>
+    </div>
+    <div class="mb-3">
+        <label for="id5" class="form-label">City Name</label>
+        <input type="text" class="form-control" id="id5" formControlName="city">
+        <div *ngIf="city?.touched && city?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="city?.errors?.['required']">
+               It is Required
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="id6" class="form-label">Pincode</label>
+        <input type="text" class="form-control" id="id6" minlength="6" maxlength="6"formControlName="pincode">
+        <div *ngIf="pincode?.touched && pincode?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="pincode?.errors?.['required']">
+               It is Required
+            </div>
+        </div>
+    </div>
+    
+     <!-- <div class="form-group">
+        <label for="phoneNumber" class="form-label">Phone Number abbreviation</label>
+        <input type="text" id="phoneNumber" class="form-control" formControlName="countrycode" readonly>
+    </div> -->
+    <div class="mb-3" formGroupName="phone">
+        <label for="id7" class="form-label">Phone no</label>
+    <div class="input-group mb-3">
+        <!-- <span class="input-group-text" id="inputGroup-sizing-default"formControlName="countrycode"name="phoneabb" readonly>{{phoneAbbreviation}}</span> -->
+        <input type="text" name="phoneabb" class="form-control " style="width: 20px;" aria-label="Text input with dropdown button" id="id11" formControlName="countrycode"[value]="phoneAbbreviation"readonly
+        >
+        <input type="text" name="phoneno" class="form-control" style="width:600px" aria-label="Text input with dropdown button" id="id7" formControlName="phoneno"
+        placeholder="Enter Phone Number">
+        <div *ngIf="phoneno?.touched && phoneno?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="phoneno?.errors?.['required']">
+               It is Required
+            </div>
+        </div>  
+    </div>
+    </div>
+  
+    <div class="mb-3">
+        <label for="id10" class="form-label">Email</label>
+        <input type="email" class="form-control" id="id10" formControlName="email">
+        <div *ngIf="email?.touched && email?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="email?.errors?.['required']">
+               It is Required
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="id8" class="form-label">Password</label>
+        <input type="password" class="form-control" id="id8" formControlName="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+        <div *ngIf="password?.touched && password?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="password?.errors?.['required']">
+               It is Required
+            </div>
+            <div  class="invalid-feedback d-block"*ngIf="password?.errors?.['pattern']">
+                Password must contain 8 character with at least 1 special and 1 upper letter
+             </div>
+         </div>
+    </div>
+    <div class="mb-3">
+        <label for="id9" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="id9" formControlName="confirmpassword" >
+        <div *ngIf="confirmpw?.touched && confirmpw?.invalid">
+            <div  class="invalid-feedback d-block"*ngIf="confirmpw?.errors?.['required']">
+               It is Required
+            </div>
+            <div class="invalid-feedback d-block" *ngIf="confirmpw?.errors?.['passwordMismatch']" >
+                Password and Confirm Password should Match
+            </div>
+        </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary"  [disabled]="regForm.invalid">Submit</button>
+    <button type="button" class="btn btn-primary" routerLink="/formData">Go To User Data</button>
+
+  </form>
+</div>

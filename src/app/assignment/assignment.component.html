@@ -1,0 +1,135 @@
+<!-- <button class="btn btn-primary mt-2" (click)="setflag()">Get Data</button>
+
+    <table class="table m-2" *ngIf="flag">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data">
+                <td>{{item.id}}</td>
+                <td>{{item.firstname}}</td>
+                <td>{{item.lastname}}</td>
+                <td>{{item.Grade}}</td>
+            </tr>
+
+        </tbody>
+        <button class="btn btn-primary mt-2" (click)="resetflag()">Hide Data</button>
+    </table>
+
+ -->
+
+<div class="container"class="container w-50" style="background-color: azure;">
+    <h2 class="header">Registration Form</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="saveForm()" novalidate>
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('name')?.invalid && (registrationForm.get('name')?.dirty&&  registrationForm.get('name')?.touched)"
+               >
+                Name is required and should contain only alphanumeric characters.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address" class="form-label">Address</label>
+            <textarea id="address" class="form-control" formControlName="address"></textarea>
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('address')?.invalid && (registrationForm.get('address')?.dirty && registrationForm.get('address')?.touched)"
+                class="error">
+                Address is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country" class="form-label">Country</label>
+            <select id="country" class="form-control" formControlName="country">
+                <option value="">Select Country</option>
+                <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+            </select>
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('country')?.invalid && (registrationForm.get('country')?.dirty && registrationForm.get('country')?.touched)"
+                >
+                Country is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="state" class="form-label">State</label>
+            <select id="state" class="form-control" formControlName="state">
+                <option value="">Select State</option>
+                <option *ngFor="let state of states[registrationForm.get('country')?.value]" [value]="state">{{ state }}
+                </option>
+            </select>
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('state')?.invalid && (registrationForm.get('state')?.dirty && registrationForm.get('state')?.touched)"
+                class="error">
+                State is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city" class="form-label">City</label>
+            <input type="text" id="city" class="form-control" formControlName="city">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('city')?.invalid && (registrationForm.get('city')?.dirty &&  registrationForm.get('city')?.touched)"
+                class="error">
+                City is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pinCode" class="form-label">Pin Code</label>
+            <input type="text" id="pinCode" class="form-control" formControlName="pinCode">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('pinCode')?.invalid && (registrationForm.get('pinCode')?.dirty && registrationForm.get('pinCode')?.touched)"
+                class="error">
+                Pin Code is required and should contain exactly 6 digits.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber" class="form-label">Phone Number abbreviation</label>
+            <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber" readonly>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumberInput" class="form-label">Phone Number</label>
+            <input type="text" id="phoneNumberInput" class="form-control" formControlName="phoneNumber">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('phoneNumber')?.invalid && (registrationForm.get('phoneNumber')?.dirty && registrationForm.get('phoneNumber')?.touched)"
+                class="error">
+                Phone Number is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty && registrationForm.get('email')?.touched)"
+                class="error">
+                Email is required and should be a valid email address.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty && registrationForm.get('password')?.touched)"
+                class="error">
+                Password is required and should contain at least 8 characters with at least 1 special character and 1
+                uppercase letter.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+            <div class="invalid-feedback d-block"
+                *ngIf="registrationForm.hasError('passwordNotMatch') && (registrationForm.get('confirmPassword')?.dirty&&  registrationForm.get('confirmPassword')?.touched)"
+                class="error">
+                Password and Confirm Password do not match.
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

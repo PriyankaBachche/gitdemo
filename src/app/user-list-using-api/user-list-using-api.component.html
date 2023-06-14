@@ -1,0 +1,25 @@
+<div class="container" mt-5 w-70> 
+    <button class="btn btn-primary m-2" (click)="setFlag()">Get Data from API</button>
+  <table *ngIf="flag" class="table mt-2">
+      <thead class="table-dark">
+         <tr>
+          <th scope="col">Sr.No.</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of userList; let i= index">
+              <th scope="row">{{i+1}}</th>
+              <td [ngStyle]="{ 'color': isActive ? 'red' : 'blue'}">{{item.first_name}}</td>
+              <td>{{item.last_name}}</td>
+              <td>{{item.email}}</td>
+              <td><img src="{{item.avatar}}" alt="blank"></td>
+            </tr>
+            
+      </tbody>
+    </table>
+  </div>
+  
